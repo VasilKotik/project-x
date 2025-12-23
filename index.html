@@ -1,1 +1,325 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project X - AI Marketplace</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-950 text-white font-inter">
+    
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Project X</span>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
+                    <a href="#how-it-works" class="text-gray-300 hover:text-white transition-colors">How it works</a>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex items-center space-x-4">
+                    <button id="loginBtn" class="px-4 py-2 text-gray-300 hover:text-white transition-colors">
+                        Sign In
+                    </button>
+                    <button id="becomeProviderBtn" class="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all">
+                        Become Provider
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center px-4 pt-20">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+                The Future of Work is Here
+            </h1>
+            <h2 class="text-2xl md:text-3xl text-gray-300 mb-4">
+                Earn with AI
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto mb-8 text-lg">
+                Automate your business, create content, and provide next-generation services with artificial intelligence
+            </p>
+            <button id="searchServicesBtn" class="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold text-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all transform hover:scale-105">
+                Browse Services
+            </button>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Popular Services
+            </h2>
+            
+            <!-- Search and Filter Bar -->
+            <div class="max-w-4xl mx-auto mb-8">
+                <div class="glass-card p-6">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <!-- Search Input -->
+                        <div class="flex-1">
+                            <div class="relative">
+                                <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                                <input 
+                                    type="text" 
+                                    id="searchInput" 
+                                    placeholder="Search services..."
+                                    class="w-full pl-10 pr-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
+                                >
+                            </div>
+                        </div>
+                        
+                        <!-- Category Filter -->
+                        <div class="md:w-64">
+                            <select id="categoryFilter" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none transition-colors">
+                                <option value="all">All Categories</option>
+                                <option value="Content">Content</option>
+                                <option value="Copywriting">Copywriting</option>
+                                <option value="Design">Design</option>
+                                <option value="Analytics">Analytics</option>
+                                <option value="Video">Video</option>
+                                <option value="Translation">Translation</option>
+                                <option value="Business">Business</option>
+                                <option value="Programming">Programming</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Active Filters Display -->
+                    <div id="activeFilters" class="mt-4 flex flex-wrap gap-2 hidden">
+                        <!-- Active filter tags will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Services Grid -->
+            <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Services will be dynamically rendered here -->
+            </div>
+            
+            <!-- No Results Message -->
+            <div id="noResults" class="hidden text-center py-12">
+                <i data-lucide="search-x" class="w-16 h-16 mx-auto mb-4 text-gray-500"></i>
+                <p class="text-gray-400 text-lg">No services found matching your criteria</p>
+                <button id="clearFilters" class="mt-4 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all">
+                    Clear Filters
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                How It Works
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="glass-card text-center p-6">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="search" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">1. Find Service</h3>
+                    <p class="text-gray-400">Choose the AI service you need from our catalog</p>
+                </div>
+                
+                <div class="glass-card text-center p-6">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="credit-card" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">2. Pay</h3>
+                    <p class="text-gray-400">Secure payment through our platform</p>
+                </div>
+                
+                <div class="glass-card text-center p-6">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="rocket" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">3. Get Result</h3>
+                    <p class="text-gray-400">Receive the finished result from the provider</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div class="modal-content absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
+            <div class="glass-card p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold">Sign In</h3>
+                    <button class="modal-close text-gray-400 hover:text-white">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <label class="block text-gray-300 mb-2">Email</label>
+                        <input type="email" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none transition-colors" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-gray-300 mb-2">Password</label>
+                        <input type="password" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none transition-colors" placeholder="••••••••" required>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all">
+                        Sign In
+                    </button>
+                </form>
+                
+                <p class="text-center text-gray-400 mt-4">
+                    No account? <a href="#" id="showRegisterBtn" class="text-blue-400 hover:text-blue-300">Register</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div class="modal-content absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
+            <div class="glass-card p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold">Register</h3>
+                    <button class="modal-close text-gray-400 hover:text-white">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                
+                <form id="registerForm">
+                    <div class="mb-4">
+                        <label class="block text-gray-300 mb-2">Email</label>
+                        <input type="email" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none transition-colors" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-300 mb-2">Password</label>
+                        <input type="password" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none transition-colors" placeholder="••••••••" required>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-gray-300 mb-2">Role</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="role" value="client" class="sr-only peer" checked>
+                                <div class="px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg peer-checked:border-blue-500 peer-checked:bg-blue-500/10 transition-all text-center">
+                                    Client
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="role" value="provider" class="sr-only peer">
+                                <div class="px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg peer-checked:border-purple-500 peer-checked:bg-purple-500/10 transition-all text-center">
+                                    Provider
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all">
+                        Register
+                    </button>
+                </form>
+                
+                <p class="text-center text-gray-400 mt-4">
+                    Already have an account? <a href="#" id="showLoginBtn" class="text-blue-400 hover:text-blue-300">Sign In</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Service Modal -->
+    <div id="addServiceModal" class="modal fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div class="modal-content absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg">
+            <div class="glass-card p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold">Add Service</h3>
+                    <button class="modal-close text-gray-400 hover:text-white">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                
+                <form id="addServiceForm">
+                    <div class="mb-4">
+                        <label class="block text-gray-300 mb-2">Service Title</label>
+                        <input type="text" id="serviceTitle" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none transition-colors" placeholder="e.g. Generate 50 Instagram posts" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-300 mb-2">Price (UAH)</label>
+                        <input type="number" id="servicePrice" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none transition-colors" placeholder="400" min="1" required>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-gray-300 mb-2">Description</label>
+                        <textarea id="serviceDescription" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none transition-colors resize-none" rows="4" placeholder="Describe your service in detail..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all">
+                        Add Service
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 z-40 hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div class="absolute top-0 right-0 h-full w-64 bg-slate-900/95 glass-nav p-6">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Menu</span>
+                <button id="closeMobileMenuBtn">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <nav class="space-y-4">
+                <a href="#services" class="block text-gray-300 hover:text-white transition-colors py-2">Services</a>
+                <a href="#how-it-works" class="block text-gray-300 hover:text-white transition-colors py-2">How it works</a>
+                <button id="mobileLoginBtn" class="block text-gray-300 hover:text-white transition-colors py-2 text-left">Sign In</button>
+                <button id="mobileBecomeProviderBtn" class="block w-full py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all text-center">
+                    Become Provider
+                </button>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
