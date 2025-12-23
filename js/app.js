@@ -113,4 +113,5 @@ if (addServiceForm) {
             submitBtn.textContent = 'Add Service';
         }
     });
+
 }
